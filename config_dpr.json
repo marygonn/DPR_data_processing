@@ -1,0 +1,31 @@
+{
+  "inp_folder_DPR":  "/mnt/DPR/raw_DPR/KaX_raw/201901",  
+  "inp_folder_GMI":  "/mnt/DPR/raw_GMI/201901",
+  "part_name_DPR": "*KaX*",
+  "part_name_GMI": "*1C-R*",  
+  "out_folder": "/mnt/DPR/results/results/results_201901_KaX/rez",
+  "ice": 1,
+
+  "Ka_mode": "Xmode",
+  "full_output": 1,
+  "Ku": 0,
+  "Ka": 1,
+  "kurt": 0,
+  "mss": 1, 
+  "add_mid": 1,
+  "corr": -0.7,
+  "r2": 0,
+ 
+  "dfl": 5,
+  "dsc": 5,
+  "nf": 5,
+  "filter": "median",  
+  
+  "lon_min": -180,
+  "lon_max": 180,
+  "lat_min": -90,
+  "lat_max": 90,   
+  "max_inc": 12.5,
+
+  "nprocs": 32
+}  
