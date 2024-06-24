@@ -40,7 +40,7 @@ def make_map(bbox, projection=ccrs.PlateCarree()):
     return fig, ax
 
 
-def f(fns):   
+def process_hdf5(fns):   
     with open("config_dpr.json", "r") as read_file:
         data = json.load(read_file)
     if data['Ka_mode'] =='Xmode':
@@ -61,10 +61,6 @@ def f(fns):
                 d['sigma'] = npz_ka['S0']
                 d['secOfDay'] = npz_ka['Secofday']
                 d['precipRate'] = npz_ka['Prec']
-                plt.hist(d['precipRate'][50][d['precipRate'][50]>-9999])
-                #plt.imshow(d['precipRate'][0])
-                plt.savefig('rain0.jpg')
-
                 d['IncAngle'] = npz_ka['Inc']
                 d['surftype'] = npz_ka['Surf']
 
@@ -75,6 +71,7 @@ def f(fns):
                 d['ice_conc_GMI'] = asi_hdf(Tc)
 
                 rezka = bandproc(d,data,fns[ifn][0])
+                # the result for the Ka-band
 
                 Lat = d['Lat']
                 Lon = d['Lon']    
@@ -90,8 +87,10 @@ def f(fns):
                 Sec = d['secOfDay']
 
                 if data['kurt']:                    
-                    kurt = rezka['kurt'] 
+                    kurt = rezka['kurt']
+                    # ^ kurtosis
                     ice_conc = rezka['conc']
+                    # ^ concentration
                 else:
                     kurt = [] 
                     ice_conc = []                   
@@ -227,7 +226,7 @@ def f_mp(fns,nprocs):
     print('chunks')
     print(chunks)	
     pool = Pool(processes=nprocs)
-    result = pool.map(f, chunks)
+    result = pool.map(process_hdf5, chunks)
     return ()
 
 if __name__ == '__main__':    
