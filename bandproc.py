@@ -109,7 +109,8 @@ def bandproc(d,data,filenm):
 
         masktot[0:imin,:] = False
         masktot[imax:,:] = False
-        indmask = np.argwhere(masktot)
+        #indmask = np.argwhere(masktot)
+        # ^ TODO: move the mask constructing code to a separate function
 
         sig = np.power(10,sigdb*0.1)
         if data['mss']:
