@@ -129,7 +129,8 @@ def process_hdf5(fns):
                     d['secOfDay'] = np.array(f['/%s/ScanTime/SecondOfDay' % l])
                     d['precipRate'] = np.array(f['/%s/SLV/precipRateESurface' % l])
                     d['IncAngle'] = np.array(f['/%s/PRE/localZenithAngle' % l])        
-                    d['surftype'] = np.array(f['/%s/PRE/landSurfaceType' % l])     
+                    d['surftype'] = np.array(f['/%s/PRE/landSurfaceType' % l])
+                    # ^ TODO: move common code fragment to a separate function!
                     rezku = bandproc(d,data,fns[ifn][0])
 
                     grKu.create_dataset('Lat', data=d['Lat'])
