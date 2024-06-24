@@ -71,6 +71,7 @@ def bandproc(d,data,filenm):
     noland = np.logical_or(noland,noland_internal)
     noland = np.logical_and(noland,sigdb>-9999.9)
     #landice_pluscoast = shellin(np.logical_and(noland, noice),1)
+    # ^ TODO define masks separately and calculate masktot by ...and.reduce
 
     landice_pluscoast = np.logical_and(noland, noice)
     ocean = np.logical_and(norain,landice_pluscoast)
