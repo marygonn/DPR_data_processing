@@ -47,9 +47,12 @@ def swathproc(th,sig,mask,data,nangles,nsamples,filenm):
     bc_j = item[1]
 
     thc = th[bc_i,bc_j]
-    boxa = th[bc_i-mdfl:bc_i+mdfl+1,bc_j-mdsc:bc_j+mdsc+1]   
+    boxa = th[bc_i-mdfl:bc_i+mdfl+1,bc_j-mdsc:bc_j+mdsc+1]
+    # ^ angles in the box
     boxb = sig[bc_i-mdfl:bc_i+mdfl+1,bc_j-mdsc:bc_j+mdsc+1]
-    boxm = mask[bc_i-mdfl:bc_i+mdfl+1,bc_j-mdsc:bc_j+mdsc+1]               
+    # ^ signal values in the box
+    boxm = mask[bc_i-mdfl:bc_i+mdfl+1,bc_j-mdsc:bc_j+mdsc+1]
+    # ^ mask values in the box
     boxa = np.tan(boxa/180*math.pi)
     boxb = np.multiply(boxb,(np.power(np.cos(boxa/180*math.pi),4)))    		
     vreg = lreg(boxa.flatten()[boxm.flatten()], boxb.flatten()[boxm.flatten()],nangles,nsamples,filenm)
@@ -65,6 +68,7 @@ def swathproc(th,sig,mask,data,nangles,nsamples,filenm):
     r2[bc_i,bc_j] = vreg['r2']                                                    
       
   hnsc = int(nsc * 0.5)
+  # ^ number of scans
   maskS0 = np.ones(mask.shape) * mask[:,:]
   masksxx = np.ones(mask.shape) * mask[:,:]
   
